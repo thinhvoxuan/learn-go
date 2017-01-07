@@ -3,3 +3,4 @@
 - [ ] http://exercism.io/exercises/go/poker/test-suite
 - [ ] http://exercism.io/exercises/go/robot-simulator/readme
 - [ ] http://exercism.io/exercises/go/minesweeper/readme
+- [ ] http://adventofcode.com/2016/day/1
