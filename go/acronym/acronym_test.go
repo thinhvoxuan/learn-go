@@ -4,25 +4,11 @@ import (
 	"testing"
 )
 
-const targetTestVersion = 2
-
-type testCase struct {
-	input    string
-	expected string
-}
-
-var stringTestCases = []testCase{
-	{"Portable Network Graphics", "PNG"},
-	{"HyperText Markup Language", "HTML"},
-	{"Ruby on Rails", "ROR"},
-	{"PHP: Hypertext Preprocessor", "PHP"},
-	{"First In, First Out", "FIFO"},
-	{"Complementary metal-oxide semiconductor", "CMOS"},
-}
+const targetTestVersion = 3
 
 func TestTestVersion(t *testing.T) {
 	if testVersion != targetTestVersion {
-		t.Errorf("Found testVersion = %v, want %v.", testVersion, targetTestVersion)
+		t.Fatalf("Found testVersion = %v, want %v.", testVersion, targetTestVersion)
 	}
 }
 

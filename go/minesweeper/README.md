@@ -1,12 +1,30 @@
-# Acronym
+# Minesweeper
 
-Convert a phrase to its acronym.
+Add the numbers to a minesweeper board.
 
-Techies love their TLA (Three Letter Acronyms)!
+Minesweeper is a popular game where the user has to find the mines using
+numeric hints that indicate how many mines are directly adjacent
+(horizontally, vertically, diagonally) to a square.
 
-Help generate some jargon by writing a program that converts a long name
-like Portable Network Graphics to its acronym (PNG).
+In this exercise you have to create some code that counts the number of
+mines adjacent to a square and transforms boards like this (where `*`
+indicates a mine):
 
+    +-----+
+    | * * |
+    |  *  |
+    |  *  |
+    |     |
+    +-----+
+
+into this:
+
+    +-----+
+    |1*3*1|
+    |13*31|
+    | 2*2 |
+    | 111 |
+    +-----+
 
 ## Running the tests
 
@@ -25,9 +43,6 @@ different specs, so the results from these benchmark tests may vary.
 For more detailed information about the Go track, including how to get help if
 you're having trouble, please visit the exercism.io [Go language page](http://exercism.io/languages/go/about).
 
-## Source
-
-Julien Vanier [https://github.com/monkbroc](https://github.com/monkbroc)
 
 ## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
