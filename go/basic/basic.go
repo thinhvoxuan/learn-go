@@ -1,4 +1,4 @@
-package basic
+package main
 
 func add(a int, b int) (c int) {
 	c = a + b
@@ -6,5 +6,5 @@ func add(a int, b int) (c int) {
 }
 
 func main() {
-	startServer()
+	StartServer()
 }
