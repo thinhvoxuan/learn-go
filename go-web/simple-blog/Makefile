@@ -14,3 +14,6 @@ dev:
 
 test:
 	go test -v
+
+test-single:
+	go test -run=TestUserValidity

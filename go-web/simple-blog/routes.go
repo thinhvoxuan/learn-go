@@ -1,9 +1,30 @@
 package main
 
 func initializeRoutes() {
-	// Handle the index route
+
+	router.Use(setUserStatus())
+
 	router.GET("/", showIndexPage)
 
-	// Handle GET requests at /article/view/some_article_id
-	router.GET("/article/view/:article_id", getArticle)
+	userRoutes := router.Group("/u")
+	{
+		userRoutes.GET("/login", ensureNotLoggedIn(), showLoginPage)
+
+		userRoutes.POST("/login", ensureNotLoggedIn(), performLogin)
+
+		userRoutes.GET("/logout", ensureLoggedIn(), logout)
+
+		userRoutes.GET("/register", ensureNotLoggedIn(), showRegistrationPage)
+
+		userRoutes.POST("/register", ensureNotLoggedIn(), register)
+	}
+
+	articleRoutes := router.Group("/article")
+	{
+		articleRoutes.GET("/view/:article_id", getArticle)
+
+		articleRoutes.GET("/create", ensureLoggedIn(), showArticleCreationPage)
+
+		articleRoutes.POST("/create", ensureLoggedIn(), createArticle)
+	}
 }

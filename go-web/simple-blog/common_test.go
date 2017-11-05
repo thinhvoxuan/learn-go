@@ -10,6 +10,7 @@ import (
 )
 
 var tmpArticleList []article
+var tmpUserList []user
 
 // This function is used for setup before executing the test functions
 func TestMain(m *testing.M) {
@@ -25,6 +26,7 @@ func getRouter(withTemplates bool) *gin.Engine {
 	r := gin.Default()
 	if withTemplates {
 		r.LoadHTMLGlob("templates/*")
+		r.Use(setUserStatus())
 	}
 	return r
 }
@@ -47,9 +49,19 @@ func testHTTPResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *
 // for testing
 func saveLists() {
 	tmpArticleList = articleList
+	tmpUserList = userList
 }
 
 // This function is used to restore the main lists from the temporary one
 func restoreLists() {
 	articleList = tmpArticleList
+	userList = tmpUserList
+}
+
+func testMiddlewareRequest(t *testing.T, r *gin.Engine, expectedHTTPCode int) {
+	req, _ := http.NewRequest("GET", "/", nil)
+
+	testHTTPResponse(t, r, req, func(w *httptest.ResponseRecorder) bool {
+			return w.Code == expectedHTTPCode
+	})
 }
