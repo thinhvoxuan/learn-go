@@ -94,7 +94,7 @@ func main() {
 	for k, v := range userMap {
 		log.Printf("Key: %s, ID: %s, Name: %s, ImID: %s\n", k, v.UserID, v.UserName, v.ImID)
 	}
-	message := "Hello from API"
-	usersCompleted := file2lines("data/completed.txt")
+	message := "Thank for logwork <3 "
+	usersCompleted := file2lines("data/not-complete.txt")
 	sendMessageIntoListUser(api, message, usersCompleted, userMap)
 }
