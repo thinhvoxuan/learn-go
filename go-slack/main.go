@@ -94,7 +94,11 @@ func main() {
 	for k, v := range userMap {
 		log.Printf("Key: %s, ID: %s, Name: %s, ImID: %s\n", k, v.UserID, v.UserName, v.ImID)
 	}
-	message := "Thank for logwork <3 "
-	usersCompleted := file2lines("data/not-complete.txt")
-	sendMessageIntoListUser(api, message, usersCompleted, userMap)
+	messageSuccess := "Thanks for completing your logwork this week :heart: "
+	usersCompleted := file2lines("data-sample/completed.txt")
+	sendMessageIntoListUser(api, messageSuccess, usersCompleted, userMap)
+
+	messageFail := "Please completing your logwork W03-2018 before Monday "
+	usersNotCompleted := file2lines("data-sample/not-complete.txt")
+	sendMessageIntoListUser(api, messageFail, usersNotCompleted, userMap)
 }
