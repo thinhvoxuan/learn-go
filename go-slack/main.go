@@ -31,11 +31,13 @@ func main() {
 		log.Printf("Key: %s, ID: %s, Name: %s, ImID: %s\n", k, v.UserID, v.UserName, v.ImID)
 	}
 
-	usersLogWorkInformation := ReadDataFromFile("data-sample/data.txt")
-	// for _, v := range usersLogWorkInformation {
-	// 	// printObject(v)
-	// 	log.Println(v.messageNotice())
-	// }
+	usersLogWorkInformation := ReadDataFromFile("data/all.txt")
+	for _, v := range usersLogWorkInformation {
+		// printObject(v)
+		log.Println(v.messageNotice())
+		log.Println()
+		log.Println()
+	}
 
 	SendMessageIntoListUser(api, usersLogWorkInformation, userMap)
 	log.Println()

@@ -74,7 +74,7 @@ func (user UserLogWork) call4ActionMessage() string {
 	if user.isCompleteLogWork() {
 		return fmt.Sprintf("Thank for completing logwork *%s* :heart: ", weekNumber(user.FromDate))
 	}
-	return fmt.Sprintf("Please complete your logwork *%s* ", weekNumber(user.FromDate))
+	return fmt.Sprintf("Please complete your logwork *%s* before 8:30 AM next Monday", weekNumber(user.FromDate))
 }
 
 func weekNumber(dateString string) string {
