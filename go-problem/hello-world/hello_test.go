@@ -10,20 +10,42 @@ import "testing"
 const targetTestVersion = 2
 
 func TestHelloWorld(t *testing.T) {
-	tests := []struct {
-		name, expected string
-	}{
-		{"", "Hello, World!"},
-		{"Gopher", "Hello, Gopher!"},
-	}
-	for _, test := range tests {
-		observed := HelloWorld(test.name)
-		if observed != test.expected {
-			t.Fatalf("HelloWorld(%s) = %v, want %v", test.name, observed, test.expected)
+
+	assertCorrectMessage := func(t *testing.T, input, got, want string) {
+		t.Helper()
+		if got != want {
+			t.Fatalf("HelloWorld(%s) = %v, want %v", input, got, want)
 		}
 	}
 
-	if testVersion != targetTestVersion {
-		t.Fatalf("Found testVersion = %v, want %v", testVersion, targetTestVersion)
-	}
+	t.Run("in French", func(t *testing.T) {
+		input := "Elodie"
+		lang := french
+		got := Helloworld(input, lang)
+		want := "Bonjour, Elodie!"
+		assertCorrectMessage(t, input, got, want)
+	})
+
+	t.Run("in Spanish", func(t *testing.T) {
+		input := "Elodie"
+		lang := spanish
+		got := Helloworld(input, lang)
+		want := "Hola, Elodie!"
+		assertCorrectMessage(t, input, got, want)
+	})
+
+	t.Run("empty name", func(t *testing.T) {
+		input := ""
+		lang := ""
+		got := Helloworld(input, lang)
+		assertCorrectMessage(t, input, got, "Hello, World!")
+	})
+
+	t.Run("empty name", func(t *testing.T) {
+		input := "Gopher"
+		lang := ""
+		got := Helloworld(input, lang)
+		assertCorrectMessage(t, input, got, "Hello, Gopher!")
+	})
+
 }
