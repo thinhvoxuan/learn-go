@@ -41,7 +41,7 @@ func TestHelloWorld(t *testing.T) {
 		assertCorrectMessage(t, input, got, "Hello, World!")
 	})
 
-	t.Run("empty name", func(t *testing.T) {
+	t.Run("in English", func(t *testing.T) {
 		input := "Gopher"
 		lang := ""
 		got := Helloworld(input, lang)
