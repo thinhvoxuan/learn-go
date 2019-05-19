@@ -8,7 +8,7 @@ func (e DictionaryErr) Error() string {
 	return string(e)
 }
 
-var (
+const (
 	ErrNotFound         = DictionaryErr("could not find the word you were looking for")
 	ErrWordExists       = DictionaryErr("word exits")
 	ErrWordDoesNotExist = DictionaryErr("word does not exits")
