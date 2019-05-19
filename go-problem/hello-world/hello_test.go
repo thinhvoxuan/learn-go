@@ -1,6 +1,9 @@
-package hello
+package main
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
 // Define a function HelloWorld(string) string.
 //
@@ -8,6 +11,18 @@ import "testing"
 // the targetTestVersion here.
 
 const targetTestVersion = 2
+
+func TestGreet(t *testing.T) {
+	buffer := bytes.Buffer{}
+	Greet(&buffer, "Chris")
+
+	got := buffer.String()
+	want := "Hello, Chris"
+
+	if got != want {
+		t.Errorf("got '%s' want '%s'", got, want)
+	}
+}
 
 func TestHelloWorld(t *testing.T) {
 
