@@ -3,14 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 )
 
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
-	GetLeague() []Player
+	GetLeague() League
 }
 
 type PlayerServer struct {
@@ -35,30 +34,6 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 	p.Handler = router
 
 	return p
-}
-
-type InMemoryPlayerStore struct {
-	store map[string]int
-}
-
-func NewInMemoryPlayerStore() *InMemoryPlayerStore {
-	return &InMemoryPlayerStore{map[string]int{}}
-}
-
-func (i *InMemoryPlayerStore) RecordWin(name string) {
-	i.store[name]++
-}
-
-func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
-	return i.store[name]
-}
-
-func (i *InMemoryPlayerStore) GetLeague() []Player {
-	var league []Player
-	for name, wins := range i.store {
-		league = append(league, Player{name, wins})
-	}
-	return league
 }
 
 func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
@@ -91,12 +66,4 @@ func (p *PlayerServer) showScore(w http.ResponseWriter, player string) {
 func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
 	p.store.RecordWin(player)
 	w.WriteHeader(http.StatusAccepted)
-}
-
-func main() {
-	server := NewPlayerServer(NewInMemoryPlayerStore())
-
-	if err := http.ListenAndServe(":5000", server); err != nil {
-		log.Fatalf("could not listen on port 5000 %v", err)
-	}
 }
