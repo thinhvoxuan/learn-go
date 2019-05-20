@@ -1,19 +1,18 @@
-package main
+package poker
 
 import (
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
-	database, cleanDatabase := createTempFile(t, "[]")
+	database, cleanDatabase := createTempFile(t, `[]`)
 	defer cleanDatabase()
 	store, err := NewFileSystemPlayerStore(database)
-	if err != nil {
-		log.Fatalf("problem creating file system player store, %v ", err)
-	}
+
+	assertNoError(t, err)
+
 	server := NewPlayerServer(store)
 	player := "Pepper"
 
@@ -29,7 +28,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 		assertResponseBody(t, response.Body.String(), "3")
 	})
 
-	t.Run("get league", func(t *testing.T) {
+	t.Run("get League", func(t *testing.T) {
 		response := httptest.NewRecorder()
 		server.ServeHTTP(response, newLeagueRequest())
 		assertStatus(t, response.Code, http.StatusOK)

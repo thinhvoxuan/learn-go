@@ -1,6 +1,8 @@
-package main
+package poker
 
-import "os"
+import (
+	"os"
+)
 
 type tape struct {
 	file *os.File
