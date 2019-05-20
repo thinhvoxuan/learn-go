@@ -8,3 +8,7 @@ go test -race
 
 go vet
 ```
+
+# TDD principles - Test for confidence
+
+![](test_for_confident.png)
